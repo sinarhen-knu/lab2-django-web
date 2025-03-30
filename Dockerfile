@@ -7,11 +7,11 @@ WORKDIR /app
 COPY package.json tailwind.config.js postcss.config.js /app/
 
 # Copy static files
-COPY django_project/static/src/ /app/django_project/static/src/
+COPY django_project/static/ /app/django_project/static/
 
 # Install dependencies and build Tailwind CSS
 RUN npm install && \
-    npx tailwindcss -i ./django_project/static/src/input.css -o ./output.css --minify
+    npx tailwindcss -i ./django_project/static/css/tailwind.css -o ./output.css --minify
 
 FROM python:3.11-slim
 

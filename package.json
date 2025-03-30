@@ -1,23 +1,20 @@
 {
-  "name": "delicious-restaurant",
+  "name": "lab2-django-web",
   "version": "1.0.0",
-  "description": "Delicious Restaurant Web App",
+  "description": "A restaurant management application built with Django, styled with Tailwind CSS, containerized with Docker, and set up with CI/CD through GitHub Actions.",
   "main": "index.js",
-  "scripts": {
-    "dev": "tailwindcss -i ./django_project/static/src/input.css -o ./django_project/static/css/output.css --watch",
-    "build": "tailwindcss -i ./django_project/static/src/input.css -o ./django_project/static/css/output.css --minify"
+  "dependencies": {
+    "tailwindcss": "^3.3.3",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.27"
   },
-  "keywords": [
-    "restaurant",
-    "django",
-    "tailwind"
-  ],
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./django_project/static/css/tailwind.css -o ./django_project/static/css/output.css",
+    "watch:css": "tailwindcss -i ./django_project/static/css/tailwind.css -o ./django_project/static/css/output.css --watch"
+  },
+  "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "autoprefixer": "^10.4.18",
-    "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1",
-    "tailwindcss-motion": "^1.0.1"
-  }
-} 
+  "license": "ISC"
+}
