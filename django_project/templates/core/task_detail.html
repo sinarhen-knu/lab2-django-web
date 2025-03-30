@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ task.title }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1>{{ task.title }}</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <div class="btn-group">
+            <a href="{% url 'task-update' task.id %}" class="btn btn-outline-primary">Edit</a>
+            <a href="{% url 'task-delete' task.id %}" class="btn btn-outline-danger">Delete</a>
+            <a href="{% url 'task-list' %}" class="btn btn-outline-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        {% if task.status == 'pending' %}
+            <span class="badge bg-warning">Pending</span>
+        {% elif task.status == 'in_progress' %}
+            <span class="badge bg-info">In Progress</span>
+        {% else %}
+            <span class="badge bg-success">Completed</span>
+        {% endif %}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Description</h5>
+        <p class="card-text">{{ task.description|linebreaks }}</p>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="row">
+            <div class="col-md-6">
+                Created: {{ task.created_at|date:"F j, Y, g:i a" }}
+            </div>
+            <div class="col-md-6 text-end">
+                Last updated: {{ task.updated_at|date:"F j, Y, g:i a" }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

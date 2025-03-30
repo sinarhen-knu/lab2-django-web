@@ -1,0 +1,7 @@
+Django==5.0.7
+psycopg2-binary==2.9.9
+gunicorn==21.2.0
+python-dotenv==1.0.0
+pytest==7.4.3
+pytest-django==4.7.0
+coverage==7.3.2 

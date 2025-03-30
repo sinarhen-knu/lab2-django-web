@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Task List | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1>Task List</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{% url 'task-create' %}" class="btn btn-primary">Add New Task</a>
+    </div>
+</div>
+
+{% if tasks %}
+    <div class="row">
+        {% for task in tasks %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        {% if task.status == 'pending' %}
+                            <span class="badge bg-warning">Pending</span>
+                        {% elif task.status == 'in_progress' %}
+                            <span class="badge bg-info">In Progress</span>
+                        {% else %}
+                            <span class="badge bg-success">Completed</span>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ task.title }}</h5>
+                        <p class="card-text">{{ task.description|truncatewords:20 }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group w-100">
+                            <a href="{% url 'task-detail' task.id %}" class="btn btn-outline-primary btn-sm">View</a>
+                            <a href="{% url 'task-update' task.id %}" class="btn btn-outline-secondary btn-sm">Edit</a>
+                            <a href="{% url 'task-delete' task.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        No tasks found. <a href="{% url 'task-create' %}" class="alert-link">Create your first task</a>.
+    </div>
+{% endif %}
+{% endblock %} 
