@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ menu_item.name }} - Delicious Restaurant{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12">
+    <div class="mb-6">
+        <nav class="text-sm">
+            <ol class="flex flex-wrap">
+                <li class="flex items-center">
+                    <a href="{% url 'home' %}" class="text-brand-500 hover:text-brand-700">Home</a>
+                    <span class="mx-2 text-gray-500">/</span>
+                </li>
+                <li class="flex items-center">
+                    <a href="{% url 'menu-list' %}" class="text-brand-500 hover:text-brand-700">Menu</a>
+                    <span class="mx-2 text-gray-500">/</span>
+                </li>
+                <li class="flex items-center">
+                    <a href="{% url 'category-detail' menu_item.category.slug %}" class="text-brand-500 hover:text-brand-700">{{ menu_item.category.name }}</a>
+                    <span class="mx-2 text-gray-500">/</span>
+                </li>
+                <li class="text-gray-600">{{ menu_item.name }}</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="mb-6 lg:mb-0">
+            {% if menu_item.image %}
+            <img src="{{ menu_item.image.url }}" alt="{{ menu_item.name }}" class="w-full h-auto rounded-lg shadow-md">
+            {% else %}
+            <img src="https://via.placeholder.com/600x400?text=No+Image" alt="{{ menu_item.name }}" class="w-full h-auto rounded-lg shadow-md">
+            {% endif %}
+        </div>
+        <div>
+            <h1 class="text-3xl font-bold mb-2">{{ menu_item.name }}</h1>
+            <p class="text-gray-500 mb-4">{{ menu_item.category.name }}</p>
+            
+            <div class="mb-6">
+                <h3 class="text-2xl font-semibold text-brand-500">${{ menu_item.price }}</h3>
+            </div>
+            
+            <div class="mb-6 flex flex-wrap">
+                {% if menu_item.is_vegetarian %}
+                <span class="bg-green-100 text-green-700 text-sm px-3 py-1 rounded-full mr-2">Vegetarian</span>
+                {% endif %}
+                {% if menu_item.is_vegan %}
+                <span class="bg-green-200 text-green-800 text-sm px-3 py-1 rounded-full mr-2">Vegan</span>
+                {% endif %}
+                {% if menu_item.is_gluten_free %}
+                <span class="bg-yellow-100 text-yellow-700 text-sm px-3 py-1 rounded-full mr-2">Gluten-Free</span>
+                {% endif %}
+            </div>
+            
+            <div class="mb-6">
+                <h5 class="font-semibold mb-2">Spice Level</h5>
+                <div class="flex items-center">
+                    {% for i in '12345'|make_list %}
+                    {% if forloop.counter <= menu_item.spice_level %}
+                    <i class="fas fa-pepper-hot text-red-500 mr-1"></i>
+                    {% else %}
+                    <i class="far fa-pepper-hot text-gray-300 mr-1"></i>
+                    {% endif %}
+                    {% endfor %}
+                    <span class="ml-2 text-sm text-gray-600">
+                        {% if menu_item.spice_level == 1 %}Mild
+                        {% elif menu_item.spice_level == 2 %}Medium
+                        {% elif menu_item.spice_level == 3 %}Spicy
+                        {% elif menu_item.spice_level == 4 %}Very Spicy
+                        {% elif menu_item.spice_level == 5 %}Extreme
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h5 class="font-semibold mb-2">Description</h5>
+                <p class="text-gray-700">{{ menu_item.description }}</p>
+            </div>
+            
+            <div class="mb-6">
+                <h5 class="font-semibold mb-2">Ingredients</h5>
+                <div class="flex flex-wrap gap-2">
+                    {% for ingredient in menu_item.ingredients.all %}
+                    <span class="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full border border-gray-200">{{ ingredient.name }}</span>
+                    {% empty %}
+                    <p class="text-gray-500">No ingredients listed.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if related_items %}
+    <div class="mt-12">
+        <h3 class="text-2xl font-bold mb-6">You Might Also Like</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for item in related_items %}
+            <div class="rounded-lg shadow-md overflow-hidden h-full border border-gray-200">
+                {% if item.image %}
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
+                {% else %}
+                <img src="https://via.placeholder.com/400x300?text=No+Image" alt="{{ item.name }}" class="w-full h-48 object-cover">
+                {% endif %}
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-4">
+                        <h5 class="text-lg font-semibold">{{ item.name }}</h5>
+                        <span class="text-brand-500 font-bold">${{ item.price }}</span>
+                    </div>
+                    <a href="{% url 'menu-item-detail' item.id %}" class="inline-block border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white px-4 py-2 rounded transition">View Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 

@@ -1,10 +1,23 @@
 from django.contrib import admin
-from .models import Task
+from .models import Category, MenuItem, Ingredient
 
 
-@admin.register(Task)
-class TaskAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'created_at', 'updated_at')
-    list_filter = ('status', 'created_at')
-    search_fields = ('title', 'description')
-    date_hierarchy = 'created_at' 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'parent', 'slug')
+    search_fields = ('name', 'description')
+    prepopulated_fields = {'slug': ('name',)}
+
+
+@admin.register(Ingredient)
+class IngredientAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+
+
+@admin.register(MenuItem)
+class MenuItemAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'price', 'is_vegetarian', 'is_vegan', 'is_gluten_free', 'spice_level', 'is_available')
+    list_filter = ('category', 'is_vegetarian', 'is_vegan', 'is_gluten_free', 'spice_level', 'is_available')
+    search_fields = ('name', 'description')
+    filter_horizontal = ('ingredients',) 
