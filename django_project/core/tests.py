@@ -1,96 +1,108 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import Task
+from .models import MenuItem, Category, Ingredient
 
 
-class TaskModelTest(TestCase):
+class MenuItemModelTest(TestCase):
     
     def setUp(self):
-        Task.objects.create(
-            title="Test Task",
-            description="This is a test task",
-            status="pending"
+        category = Category.objects.create(name="Test Category")
+        MenuItem.objects.create(
+            name="Test Item",
+            description="This is a test menu item",
+            price=9.99,
+            category=category,
+            spice_level=1
         )
     
-    def test_task_creation(self):
-        task = Task.objects.get(title="Test Task")
-        self.assertEqual(task.description, "This is a test task")
-        self.assertEqual(task.status, "pending")
+    def test_menuitem_creation(self):
+        item = MenuItem.objects.get(name="Test Item")
+        self.assertEqual(item.description, "This is a test menu item")
+        self.assertEqual(item.price, 9.99)
     
-    def test_task_str_method(self):
-        task = Task.objects.get(title="Test Task")
-        self.assertEqual(str(task), "Test Task")
+    def test_menuitem_str_method(self):
+        item = MenuItem.objects.get(name="Test Item")
+        self.assertEqual(str(item), "Test Item")
 
 
-class TaskViewsTest(TestCase):
+class MenuItemViewsTest(TestCase):
     
     def setUp(self):
         self.client = Client()
-        self.task = Task.objects.create(
-            title="Test Task",
-            description="This is a test task",
-            status="pending"
+        category = Category.objects.create(name="Test Category")
+        self.menuitem = MenuItem.objects.create(
+            name="Test Item",
+            description="This is a test menu item",
+            price=9.99,
+            category=category,
+            spice_level=1
         )
-        self.list_url = reverse('task-list')
-        self.detail_url = reverse('task-detail', args=[self.task.id])
-        self.create_url = reverse('task-create')
-        self.update_url = reverse('task-update', args=[self.task.id])
-        self.delete_url = reverse('task-delete', args=[self.task.id])
+        self.list_url = reverse('menu-item-list')
+        self.detail_url = reverse('menu-item-detail', args=[self.menuitem.id])
+        self.create_url = reverse('menu-item-create')
+        self.update_url = reverse('menu-item-update', args=[self.menuitem.id])
+        self.delete_url = reverse('menu-item-delete', args=[self.menuitem.id])
         self.health_url = reverse('health-check')
     
-    def test_task_list_view(self):
+    def test_menuitem_list_view(self):
         response = self.client.get(self.list_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'core/task_list.html')
-        self.assertContains(response, "Test Task")
+        self.assertTemplateUsed(response, 'core/admin/menu_item_list.html')
+        self.assertContains(response, "Test Item")
     
-    def test_task_detail_view(self):
+    def test_menuitem_detail_view(self):
         response = self.client.get(self.detail_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'core/task_detail.html')
-        self.assertContains(response, "Test Task")
+        self.assertTemplateUsed(response, 'core/menu_item_detail.html')
+        self.assertContains(response, "Test Item")
     
-    def test_task_create_view(self):
+    def test_menuitem_create_view(self):
         response = self.client.get(self.create_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'core/task_form.html')
+        self.assertTemplateUsed(response, 'core/admin/menu_item_form.html')
         
         # Test POST
-        task_data = {
-            'title': 'New Task',
-            'description': 'This is a new task',
-            'status': 'in_progress'
+        category = Category.objects.get(name="Test Category")
+        menuitem_data = {
+            'name': 'New Item',
+            'description': 'This is a new menu item',
+            'price': 12.99,
+            'category': category.id,
+            'spice_level': 2
         }
-        response = self.client.post(self.create_url, task_data)
+        response = self.client.post(self.create_url, menuitem_data)
         self.assertEqual(response.status_code, 302)  # Redirect after POST
-        self.assertTrue(Task.objects.filter(title='New Task').exists())
+        self.assertTrue(MenuItem.objects.filter(name='New Item').exists())
     
-    def test_task_update_view(self):
+    def test_menuitem_update_view(self):
         response = self.client.get(self.update_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'core/task_form.html')
+        self.assertTemplateUsed(response, 'core/admin/menu_item_form.html')
         
         # Test POST
+        category = Category.objects.get(name="Test Category")
         updated_data = {
-            'title': 'Updated Task',
-            'description': 'This task has been updated',
-            'status': 'completed'
+            'name': 'Updated Item',
+            'description': 'This menu item has been updated',
+            'price': 14.99,
+            'category': category.id,
+            'spice_level': 3
         }
         response = self.client.post(self.update_url, updated_data)
         self.assertEqual(response.status_code, 302)  # Redirect after POST
-        self.task.refresh_from_db()
-        self.assertEqual(self.task.title, 'Updated Task')
-        self.assertEqual(self.task.status, 'completed')
+        self.menuitem.refresh_from_db()
+        self.assertEqual(self.menuitem.name, 'Updated Item')
+        self.assertEqual(self.menuitem.price, 14.99)
     
-    def test_task_delete_view(self):
+    def test_menuitem_delete_view(self):
         response = self.client.get(self.delete_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'core/task_confirm_delete.html')
+        self.assertTemplateUsed(response, 'core/admin/menu_item_confirm_delete.html')
         
         # Test POST (delete)
         response = self.client.post(self.delete_url)
         self.assertEqual(response.status_code, 302)  # Redirect after POST
-        self.assertFalse(Task.objects.filter(id=self.task.id).exists())
+        self.assertFalse(MenuItem.objects.filter(id=self.menuitem.id).exists())
     
     def test_health_check(self):
         response = self.client.get(self.health_url)
@@ -98,27 +110,31 @@ class TaskViewsTest(TestCase):
         self.assertTemplateUsed(response, 'core/health_check.html')
 
 
-class TaskFormTest(TestCase):
+class MenuItemFormTest(TestCase):
     
     def test_valid_form(self):
-        from .forms import TaskForm
+        from .forms import MenuItemForm
         
+        category = Category.objects.create(name="Form Test Category")
         data = {
-            'title': 'Form Test Task',
-            'description': 'This is a task created from a form test',
-            'status': 'in_progress'
+            'name': 'Form Test Item',
+            'description': 'This is a menu item created from a form test',
+            'price': 8.99,
+            'category': category.id,
+            'spice_level': 1
         }
-        form = TaskForm(data=data)
+        form = MenuItemForm(data=data)
         self.assertTrue(form.is_valid())
     
     def test_invalid_form(self):
-        from .forms import TaskForm
+        from .forms import MenuItemForm
         
-        # Empty title (required field)
+        # Empty name (required field)
         data = {
-            'title': '',
-            'description': 'This is a task with no title',
-            'status': 'pending'
+            'name': '',
+            'description': 'This is a menu item with no name',
+            'price': 7.99,
+            'spice_level': 1
         }
-        form = TaskForm(data=data)
+        form = MenuItemForm(data=data)
         self.assertFalse(form.is_valid()) 
