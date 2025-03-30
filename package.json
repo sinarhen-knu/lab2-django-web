@@ -4,11 +4,13 @@
   "description": "A restaurant management application built with Django, styled with Tailwind CSS, containerized with Docker, and set up with CI/CD through GitHub Actions.",
   "main": "index.js",
   "dependencies": {
-    "tailwindcss": "^3.3.3",
     "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.27"
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "tailwindcss-motion": "^1.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "tailwindcss -i ./django_project/static/css/tailwind.css -o ./django_project/static/css/output.css",
