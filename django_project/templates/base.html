@@ -15,22 +15,22 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body class="min-h-screen flex flex-col text-gray-800 bg-white">
-    <nav class="sticky top-0 bg-white shadow-md z-10">
+    <nav class="sticky top-0 bg-white shadow-md z-10 motion-preset-fade">
         <div class="container mx-auto px-4 py-2">
             <div class="flex justify-between items-center">
-                <a class="text-brand-500 font-bold text-xl flex items-center" href="{% url 'home' %}">
+                <a class="text-brand-500 font-bold text-xl flex items-center motion-preset-pulse-sm" href="{% url 'home' %}">
                     <i class="fas fa-utensils mr-2"></i>Delicious Restaurant
                 </a>
                 
                 <!-- Mobile menu button -->
-                <button id="menu-toggle" class="lg:hidden focus:outline-none">
+                <button id="menu-toggle" class="lg:hidden focus:outline-none motion-preset-pulse-sm">
                     <i class="fas fa-bars text-brand-500"></i>
                 </button>
                 
                 <!-- Desktop menu -->
                 <div class="hidden lg:flex items-center space-x-4">
-                    <a class="px-3 py-2 hover:text-brand-500 transition" href="{% url 'home' %}">Home</a>
-                    <a class="px-3 py-2 hover:text-brand-500 transition" href="{% url 'menu-list' %}">Menu</a>
+                    <a class="px-3 py-2 hover:text-brand-500 transition motion-preset-pulse-sm" href="{% url 'home' %}">Home</a>
+                    <a class="px-3 py-2 hover:text-brand-500 transition motion-preset-pulse-sm" href="{% url 'menu-list' %}">Menu</a>
                 </div>
             </div>
             
@@ -46,10 +46,10 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-secondary-600 text-white py-10 mt-10">
+    <footer class="bg-secondary-600 text-white py-10 mt-10 motion-preset-fade">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
+                <div class="motion-preset-slide-up">
                     <h5 class="text-lg font-bold mb-4">Delicious Restaurant</h5>
                     <p class="flex items-center mb-2">
                         <i class="fas fa-map-marker-alt mr-2"></i>123 Main Street, City
@@ -61,17 +61,17 @@
                         <i class="fas fa-envelope mr-2"></i>contact@deliciousrestaurant.com
                     </p>
                 </div>
-                <div>
+                <div class="motion-preset-slide-up">
                     <h5 class="text-lg font-bold mb-4">Hours</h5>
                     <p class="mb-2">Monday - Friday: 11am - 10pm</p>
                     <p class="mb-2">Saturday - Sunday: 10am - 11pm</p>
                 </div>
-                <div>
+                <div class="motion-preset-slide-up">
                     <h5 class="text-lg font-bold mb-4">Follow Us</h5>
                     <div class="flex space-x-4 text-xl">
-                        <a href="#" class="text-white hover:text-brand-300 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-white hover:text-brand-300 transition"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white hover:text-brand-300 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white hover:text-brand-300 transition motion-preset-pulse-sm"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white hover:text-brand-300 transition motion-preset-pulse-sm"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white hover:text-brand-300 transition motion-preset-pulse-sm"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
             </div>

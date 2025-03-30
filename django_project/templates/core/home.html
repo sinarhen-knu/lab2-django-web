@@ -5,13 +5,13 @@
 {% block content %}
 <!-- Hero Section -->
 <section class="py-12 bg-gray-100 text-center">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 motion-duration-1000 motion-preset-slide-in">
         <div class="flex justify-center">
             <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">Delicious Cuisine for Every Taste</h1>
-                <p class="text-xl mb-8">Experience the authentic flavors of our carefully crafted dishes made with fresh, high-quality ingredients.</p>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 motion-preset-slide-down">Delicious Cuisine for Every Taste</h1>
+                <p class="text-xl mb-8 motion-preset-fade">Experience the authentic flavors of our carefully crafted dishes made with fresh, high-quality ingredients.</p>
                 <div class="flex justify-center">
-                    <a href="{% url 'menu-list' %}" class="bg-brand-500 hover:bg-brand-600 text-white font-medium py-2 px-6 rounded-md transition">View Our Menu</a>
+                    <a href="{% url 'menu-list' %}" class="bg-brand-500 hover:bg-brand-600 text-white font-medium py-2 px-6 rounded-md transition motion-preset-pulse-md">View Our Menu</a>
                 </div>
             </div>
         </div>
@@ -21,10 +21,10 @@
 <!-- Featured Items Section -->
 <section class="py-12">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8">Featured Dishes</h2>
+        <h2 class="text-3xl font-bold text-center mb-8 motion-preset-slide-up">Featured Dishes</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {% for item in featured_items %}
-            <div class="rounded-lg shadow-md overflow-hidden h-full">
+            <div class="rounded-lg shadow-md overflow-hidden h-full motion-preset-slide-in">
                 {% if item.image %}
                 <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
                 {% else %}
@@ -47,7 +47,7 @@
                         <span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full mr-1">Gluten-Free</span>
                         {% endif %}
                     </div>
-                    <a href="{% url 'menu-item-detail' item.id %}" class="inline-block border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white px-4 py-2 rounded transition">View Details</a>
+                    <a href="{% url 'menu-item-detail' item.id %}" class="inline-block border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white px-4 py-2 rounded transition motion-preset-pulse-sm">View Details</a>
                 </div>
             </div>
             {% empty %}
@@ -62,14 +62,14 @@
 <!-- Categories Section -->
 <section class="py-12 bg-gray-100">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8">Explore Our Menu</h2>
+        <h2 class="text-3xl font-bold text-center mb-8 motion-preset-slide-up">Explore Our Menu</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {% for category in categories %}
-            <div>
+            <div class="motion-preset-slide-in">
                 <a href="{% url 'category-detail' category.slug %}" class="block group">
                     <div class="relative overflow-hidden rounded-lg shadow-md">
                         <img src="https://via.placeholder.com/400x250?text={{ category.name }}" alt="{{ category.name }}" class="w-full h-48 object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center p-4 text-white">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center p-4 text-white motion-preset-fade">
                             <h3 class="text-xl font-semibold mb-1">{{ category.name }}</h3>
                             <p class="text-sm text-center">{{ category.description|truncatechars:50 }}</p>
                         </div>
@@ -89,10 +89,10 @@
 <section class="py-12">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div class="mb-6 lg:mb-0">
+            <div class="mb-6 lg:mb-0 motion-preset-slide-left">
                 <img src="https://via.placeholder.com/600x400?text=Restaurant+Image" alt="Restaurant" class="rounded-lg w-full shadow-md">
             </div>
-            <div>
+            <div class="motion-preset-slide-right">
                 <h2 class="text-3xl font-bold mb-4">About Our Restaurant</h2>
                 <p class="text-xl mb-4">Experience the finest dining experience with our exceptional cuisine and atmosphere.</p>
                 <p class="mb-4">At Delicious Restaurant, we are committed to using the freshest ingredients to create memorable dishes. Our chefs combine traditional techniques with modern innovation to bring you a diverse menu that caters to all tastes and dietary preferences.</p>
