@@ -69,11 +69,13 @@ class MenuItemFormTest(TestCase):
         from .forms import MenuItemForm
         
         category = Category.objects.create(name="Form Test Category")
+        ingredient = Ingredient.objects.create(name="Test Ingredient")
         data = {
             'name': 'Form Test Item',
             'description': 'This is a menu item created from a form test',
             'price': 8.99,
             'category': category.id,
+            'ingredients': [ingredient.id],
             'spice_level': 1,
             'is_vegetarian': False,
             'is_vegan': False,
