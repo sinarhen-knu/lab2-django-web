@@ -8,11 +8,9 @@ Roman set up a comprehensive CI/CD pipeline for the project:
 - Implemented a multi-stage CI/CD pipeline:
   - Test stage with pytest and coverage reports
   - Build stage for Docker image creation
-  - Deploy stage for automatic deployment to test server
 - Set up proper environment variables and secrets management
 - Configured PostgreSQL service container for testing
 - Implemented automatic migration execution during deployment
-- Added proper checks and conditional steps for different branches
 - Ensured test coverage reporting for quality control
 
 ## Docker Setup
@@ -45,4 +43,4 @@ Roman contributed to the testing infrastructure:
 - Added environment-specific test configurations
 - Ensured proper test isolation with dedicated test database
 
-Roman's work ensures the application is properly built, tested, and deployed in a consistent manner, with a robust CI/CD pipeline that maintains code quality and reliability throughout the development process. 
+Roman's work ensures the application is properly built, tested, and deployed in a consistent manner, with a robust CI/CD pipeline that maintains code quality and reliability throughout the development process.
