@@ -7,8 +7,8 @@
     
     {% load static %}
     <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="/static/css/output.css">
-    
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -18,19 +18,19 @@
     <nav class="sticky top-0 bg-white shadow-md z-10 motion-preset-fade">
         <div class="container mx-auto px-4 py-2">
             <div class="flex justify-between items-center">
-                <a class="text-brand-500 font-bold text-xl flex items-center motion-preset-pulse-sm" href="{% url 'home' %}">
+                <a class="text-brand-500 font-bold text-xl flex items-center " href="{% url 'home' %}">
                     <i class="fas fa-utensils mr-2"></i>Delicious Restaurant
                 </a>
                 
                 <!-- Mobile menu button -->
-                <button id="menu-toggle" class="lg:hidden focus:outline-none motion-preset-pulse-sm">
+                <button id="menu-toggle" class="lg:hidden focus:outline-none ">
                     <i class="fas fa-bars text-brand-500"></i>
                 </button>
                 
                 <!-- Desktop menu -->
                 <div class="hidden lg:flex items-center space-x-4">
-                    <a class="px-3 py-2 hover:text-brand-500 transition motion-preset-pulse-sm" href="{% url 'home' %}">Home</a>
-                    <a class="px-3 py-2 hover:text-brand-500 transition motion-preset-pulse-sm" href="{% url 'menu-list' %}">Menu</a>
+                    <a class="px-3 py-2 hover:text-brand-500 transition " href="{% url 'home' %}">Home</a>
+                    <a class="px-3 py-2 hover:text-brand-500 transition " href="{% url 'menu-list' %}">Menu</a>
                 </div>
             </div>
             
@@ -69,9 +69,9 @@
                 <div class="motion-preset-slide-up">
                     <h5 class="text-lg font-bold mb-4">Follow Us</h5>
                     <div class="flex space-x-4 text-xl">
-                        <a href="#" class="text-white hover:text-brand-300 transition motion-preset-pulse-sm"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-white hover:text-brand-300 transition motion-preset-pulse-sm"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white hover:text-brand-300 transition motion-preset-pulse-sm"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white hover:text-brand-300 transition "><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white hover:text-brand-300 transition "><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white hover:text-brand-300 transition "><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,6 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
         document.getElementById('menu-toggle').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');

@@ -73,8 +73,8 @@
                         </div>
                         
                         <div class="space-y-3">
-                            <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-medium py-2 px-4 rounded transition motion-preset-pulse-sm">Apply Filters</button>
-                            <a href="{% url 'menu-list' %}" class="block w-full text-center border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white py-2 px-4 rounded transition motion-preset-pulse-sm">Reset Filters</a>
+                            <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-medium py-2 px-4 rounded transition ">Apply Filters</button>
+                            <a href="{% url 'menu-list' %}" class="block w-full text-center border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white py-2 px-4 rounded transition ">Reset Filters</a>
                         </div>
                     </form>
                 </div>
@@ -124,7 +124,7 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            <a href="{% url 'menu-item-detail' item.id %}" class="inline-block border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white px-3 py-1 rounded transition text-sm motion-preset-pulse-sm">View Details</a>
+                            <a href="{% url 'menu-item-detail' item.id %}" class="inline-block border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white px-3 py-1 rounded transition text-sm ">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                     <i class="fas fa-search text-5xl mb-4 text-gray-400"></i>
                     <h4 class="text-xl font-semibold mb-2">No items found</h4>
                     <p class="text-gray-500 mb-4">Try adjusting your filters or search criteria.</p>
-                    <a href="{% url 'menu-list' %}" class="bg-brand-500 hover:bg-brand-600 text-white font-medium py-2 px-4 rounded transition motion-preset-pulse-sm">Reset Filters</a>
+                    <a href="{% url 'menu-list' %}" class="bg-brand-500 hover:bg-brand-600 text-white font-medium py-2 px-4 rounded transition ">Reset Filters</a>
                 </div>
                 {% endfor %}
             </div>

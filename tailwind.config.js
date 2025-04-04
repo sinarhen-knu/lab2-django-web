@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     "./django_project/templates/**/*.html",
-    "./django_project/core/templates/**/*.html",
+    "./django_project/templates/core/**/*.html",
   ],
   theme: {
     extend: {
