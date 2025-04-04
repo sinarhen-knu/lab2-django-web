@@ -9,7 +9,6 @@ COPY package.json tailwind.config.js postcss.config.js /app/
 # Copy static files AND templates for Tailwind to scan
 COPY django_project/static/ /app/django_project/static/
 COPY django_project/templates/ /app/django_project/templates/
-COPY django_project/core/templates/ /app/django_project/core/templates/
 
 # Install dependencies and build Tailwind CSS
 RUN npm install && \
