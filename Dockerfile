@@ -50,7 +50,7 @@ RUN cp /app/static/css/output.css /app/staticfiles/css/output.css
 # Create a start script to run migrations and seed data before starting the server
 RUN echo '#!/bin/bash \n\
 python manage.py migrate --noinput \n\
-python manage.py seed_data --noinput \n\
+python manage.py seed_data \n\
 exec gunicorn --bind 0.0.0.0:${PORT:-8000} config.wsgi:application' > /app/start.sh && chmod +x /app/start.sh
 
 # Run the start script instead of gunicorn directly
