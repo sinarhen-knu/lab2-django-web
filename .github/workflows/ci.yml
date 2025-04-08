@@ -65,7 +65,7 @@ jobs:
           python -m coverage run -m pytest
           python -m coverage report
 
-  build:
+  build-and-deploy:
     needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
@@ -88,3 +88,9 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/restaurant-manager:latest
+
+      - name: Deploy
+        run: |
+          ENCODED_IMAGE_URL="docker.io%2F${{ secrets.DOCKER_HUB_USERNAME }}%2Frestaurant-manager%3Alatest"
+          RENDER_DEPLOY_URL="${{ secrets.RENDER_DEPLOY_HOOK_URL }}&imgURL=${ENCODED_IMAGE_URL}"
+          curl -X POST "${RENDER_DEPLOY_URL}"
