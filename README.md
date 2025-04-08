@@ -223,3 +223,5 @@ For the CI/CD pipeline, set these secrets in your GitHub repository:
 Docker container is published into: https://hub.docker.com/r/sinarhen/restaurant-manager
 
 #gh actions comment
+
+Push BRO
