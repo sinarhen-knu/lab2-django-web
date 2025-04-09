@@ -28,7 +28,7 @@
                 {% if item.image %}
                 <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
                 {% else %}
-                <img src="https://via.placeholder.com/400x300?text=No+Image" alt="{{ item.name }}" class="w-full h-48 object-cover">
+                <img src="https://placehold.co/400x300/cccccc/666666?text=No+Image" alt="{{ item.name }}" class="w-full h-48 object-cover">
                 {% endif %}
                 <div class="p-4">
                     <div class="flex justify-between items-start mb-2">
@@ -68,7 +68,7 @@
             <div class="motion-preset-slide-in">
                 <a href="{% url 'category-detail' category.slug %}" class="block group">
                     <div class="relative overflow-hidden rounded-lg shadow-md">
-                        <img src="https://via.placeholder.com/400x250?text={{ category.name }}" alt="{{ category.name }}" class="w-full h-48 object-cover">
+                        <img src="https://placehold.co/400x250/cccccc/666666?text={{ category.name }}" alt="{{ category.name }}" class="w-full h-48 object-cover">
                         <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center p-4 text-white motion-preset-fade">
                             <h3 class="text-xl font-semibold mb-1">{{ category.name }}</h3>
                             <p class="text-sm text-center">{{ category.description|truncatechars:50 }}</p>
@@ -90,7 +90,7 @@
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div class="mb-6 lg:mb-0 motion-preset-slide-left">
-                <img src="https://via.placeholder.com/600x400?text=Restaurant+Image" alt="Restaurant" class="rounded-lg w-full shadow-md">
+                <img src="https://placehold.co/600x400/cccccc/666666?text=Restaurant+Image" alt="Restaurant" class="rounded-lg w-full shadow-md">
             </div>
             <div class="motion-preset-slide-right">
                 <h2 class="text-3xl font-bold mb-4">About Our Restaurant</h2>
