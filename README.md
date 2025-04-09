@@ -218,7 +218,7 @@ For the CI/CD pipeline, set these secrets in your GitHub repository:
 - `DOCKER_HUB_ACCESS_TOKEN`: Your Docker Hub access token
 - `TEST_SERVER_HOST`: Your test server hostname/IP
 - `TEST_SERVER_USER`: SSH username for the test server
-- `TEST_SERVER_SSH_KEY`: SSH private key for the test server
+- `TEST_SERVER_SSH_KEY`: SSH private key for the test server 
 
 Docker container is published into: https://hub.docker.com/r/sinarhen/restaurant-manager
 
