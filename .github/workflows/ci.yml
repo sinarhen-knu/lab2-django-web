@@ -89,8 +89,30 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/restaurant-manager:latest
 
-      - name: Deploy
+      - name: Deploy to Render
         run: |
-          ENCODED_IMAGE_URL="docker.io%2F${{ secrets.DOCKER_HUB_USERNAME }}%2Frestaurant-manager%latest"
-          RENDER_DEPLOY_URL="https://api.render.com/deploy/srv-cvqkflfgi27c73enrb5g?key=AsYNWBi5mJQ&imgURL=${ENCODED_IMAGE_URL}"
-          curl -X POST "${RENDER_DEPLOY_URL}"
+          ENCODED_IMAGE_URL="docker.io%2F${{ secrets.DOCKER_HUB_USERNAME }}%2Frestaurant-manager%3Alatest"
+          echo "Using image URL: $ENCODED_IMAGE_URL"
+          
+          RENDER_DEPLOY_URL="${{ secrets.RENDER_DEPLOY_HOOK_URL }}&imgURL=${ENCODED_IMAGE_URL}"
+          echo "Deploy URL (protected): ${RENDER_DEPLOY_URL//${{ secrets.RENDER_DEPLOY_HOOK_URL }}/*****}"
+          
+          RESPONSE_FILE="deploy_response.json"
+          HTTP_STATUS=$(curl -s -w "%{http_code}" -X POST "${RENDER_DEPLOY_URL}" -o $RESPONSE_FILE)
+          echo "HTTP Status: $HTTP_STATUS"
+          echo "Response body:"
+          cat $RESPONSE_FILE
+          
+          if [[ $HTTP_STATUS -lt 200 || $HTTP_STATUS -ge 300 ]]; then
+            echo "::error::Deployment failed with HTTP status $HTTP_STATUS"
+            echo "::error::Response: $(cat $RESPONSE_FILE)"
+            exit 1
+          fi
+          
+          if grep -q "error\|badrequest" $RESPONSE_FILE; then
+            echo "::error::Deployment API returned an error"
+            echo "::error::Response: $(cat $RESPONSE_FILE)"
+            exit 1
+          fi
+          
+          echo "Deployment successfully triggered"
